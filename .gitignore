@@ -1,0 +1,25 @@
+# Global
+.DS_Store
+Thumbs.db
+.vscode/
+*.log
+
+# Environment
+.env
+.env.*
+
+# Frontend (React/Vite)
+client/node_modules/
+client/dist/
+client/.env
+
+# Backend (Express/Node)
+server/node_modules/
+server/.env
+
+# Build
+build/
+dist/
+
+# Others
+coverage/
