@@ -10,13 +10,13 @@ const Navbar = () => {
 
   return (
     <div
-      className="fixed z-50 w-full backdrop-blur-2xl flex justify-between items-center py-3 px-4
+      className="fixed z-50 w-full bg-transparent backdrop-blur-sm flex justify-between items-center py-3 px-4
       sm:px-20 xl:px-32"
     >
       <img
-        src={assets.Zzlogo}
+        src={assets.Zz}
         alt="logo"
-        className="w-8 sm:w-12 cursor-pointer"
+        className="w-24 sm:w-32 cursor-pointer"
         onClick={() => navigate("/")}
       />
 

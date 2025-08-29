@@ -1,5 +1,6 @@
 import logo from "./logo.svg";
 import Zzlogo from "./ZzLogo.png";
+import Zz from './Zz.ai.png';
 import gradientBackground from "./gradientBackground.png";
 import user_group from "./user_group.png";
 import star_icon from "./star_icon.svg";
@@ -13,6 +14,7 @@ import ai_gen_img_3 from "./ai_gen_img_3.png";
 
 export const assets = {
     logo,
+    Zz,
     Zzlogo,
     gradientBackground,
     user_group,
