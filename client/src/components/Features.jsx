@@ -73,7 +73,7 @@ const Features = () => {
   return (
     <section className="px-6 py-16 sm:px-12 lg:px-20">
       <div className="text-center">
-        <h2 className="text-slate-700 text-2xl sm:text-4xl font-semibold mb-2">Next-Gen AI Tool</h2>
+        <h2 className="text-slate-700 text-2xl sm:text-4xl font-semibold mb-2">AI-Powered Innovation</h2>
         <p className="text-gray-500 max-w-lg mx-auto mb-2">Transform your ideas into polished text, visuals, and workflows with intelligent automation.</p>
       </div>
       <div className="max-w-6xl mx-auto">

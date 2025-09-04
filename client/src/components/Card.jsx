@@ -7,7 +7,7 @@ const Card = ({ icon: Icon, title, description }) => {
     >
       {/* Inner content */}
       <div
-        className="bg-white rounded-xl h-full p-6 
+        className="bg-gradient-to-br from-blue-100 to-purple-100 rounded-xl h-full p-6 
                    transform transition duration-300 hover:scale-105 hover:shadow-2xl"
       >
         {/* Icon */}

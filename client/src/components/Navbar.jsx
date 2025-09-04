@@ -68,7 +68,7 @@ const Navbar = () => {
           style={{
             fontFamily: "Poppins, sans-serif",
             fontWeight: "800",
-            background: "linear-gradient(135deg, #3B82F6 0%, #8B5CF6 100%)",
+            background: "linear-gradient(135deg, #1E40AF 0%, #6D28D9 100%)",
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             backgroundClip: "text",
@@ -118,7 +118,7 @@ const Navbar = () => {
           <button
             className="hamburger-button p-2 text-gray-700 hover:text-blue-600 transition-colors"
             onClick={(e) => {
-              e.stopPropagation(); // ✅ prevent immediate close
+              e.stopPropagation(); // prevent immediate close
               setIsMobileMenuOpen(!isMobileMenuOpen);
             }}
           >
@@ -136,7 +136,7 @@ const Navbar = () => {
         className={`mobile-menu fixed inset-0 z-40 md:hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
-        onClick={(e) => e.stopPropagation()} // ✅ prevent close when clicking inside
+        onClick={(e) => e.stopPropagation()} //prevent close when clicking inside
       >
         {/* Backdrop */}
         <div className="absolute inset-0 bg-white/80 backdrop-blur-md" />
