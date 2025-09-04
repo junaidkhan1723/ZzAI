@@ -1,12 +1,12 @@
 import React from 'react'
 import Navbar from '../components/Navbar'
-import InfiniteLogo from '../components/InfiniteLogo'
+import Hero from '../components/Hero'
 
 const Home = () => {
   return (
     <>
     <Navbar/>
-    <InfiniteLogo/>
+    <Hero/>
     </>
   )
 }

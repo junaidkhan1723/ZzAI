@@ -12,11 +12,15 @@
   "dependencies": {
     "@clerk/clerk-react": "^5.43.1",
     "@tailwindcss/vite": "^4.1.12",
+    "clsx": "^2.1.1",
+    "framer-motion": "^12.23.12",
     "lucide-react": "^0.541.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^7.8.2",
-    "tailwindcss": "^4.1.12"
+    "tailwind-merge": "^3.3.1",
+    "tailwindcss": "^4.1.12",
+    "utils": "^0.3.1"
   },
   "devDependencies": {
     "@eslint/js": "^9.33.0",

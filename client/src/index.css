@@ -1,4 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Outfit:wght@100..900&display=swap');
+
 @import "tailwindcss";
 
 *{
@@ -11,6 +12,23 @@
     --color-primary: #5044E5;
 }
 
+/* navbar*/
+@keyframes fade-in-up {
+          from {
+            opacity: 0;
+            transform: translateY(20px);
+          }
+          to {
+            opacity: 1;
+            transform: translateY(0);
+          }
+        }
+        .animate-fade-in-up {
+          animation: fade-in-up 0.5s ease-out;
+        }
+
+/* infinite logo */
+
 @layer utilities {
   @keyframes marquee {
     0% { transform: translateX(0); }
@@ -18,6 +36,20 @@
   }
 
   .animate-marquee {
-    animation: marquee 25s linear infinite;
+    animation: marquee 40s linear infinite;
+  }
+}
+
+
+@theme {
+  --animate-pulse-gradient: pulse-gradient 6s ease infinite;
+  
+  @keyframes pulse-gradient {
+    0%, 100% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
   }
 }
