@@ -78,6 +78,11 @@ const Hero = () => {
       <div className="mt-10">
         <InfiniteLogo />
       </div>
+
+      {/* Features Section */}
+      <div className="mt-16 w-full">
+        <Features />
+      </div>
     </section>
   );
 };
