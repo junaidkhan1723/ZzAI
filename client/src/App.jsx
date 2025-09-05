@@ -23,7 +23,7 @@ function App() {
         <Route path='/ai' element={<Layout/>}>
           <Route index element={<Dashboard/>}/>
           <Route path='write-article' element={<WriteArticle/>}/>
-          <Route path='blog-title' element={<BolgTitles/>}/>
+          <Route path='blog-titles' element={<BolgTitles/>}/>
           <Route path='generate-images' element={<GenerateImages/>}/>
           <Route path='remove-background' element={<RemoveBackground/>}/>
           <Route path='remove-object' element={<RemoveObject/>}/>

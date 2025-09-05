@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { useNavigate } from "react-router-dom";
-import Features from "./Features";
 import InfiniteLogo from "./InfiniteLogo";
 import { assets } from "../assets/assets";
 
@@ -26,11 +25,11 @@ const Hero = () => {
   return (
     <section
       className="relative flex flex-col items-center justify-center 
-                 min-h-screen pt-40 sm:pt-30 px-4 sm:px-12 lg:px-24 
+                 min-h-screen  px-4 sm:px-12 lg:px-24 
                  text-center bg-[url(/gradientBackground.png)] bg-cover bg-no-repeat"
     >
       {/* Main Heading */}
-      <h1 className="text-2xl sm:text-5xl md:text-6xl 2xl:text-7xl font-bold leading-tight tracking-normal text-gray-900">
+      <h1 className="text-4xl sm:text-5xl md:text-6xl 2xl:text-7xl font-bold leading-tight tracking-normal text-gray-900">
         Create smarter content with <br />Next-Gen
         <span className="text-primary"> AI Tools</span>
       </h1>
@@ -56,13 +55,13 @@ const Hero = () => {
         <button
           onClick={() => navigate("/ai")}
           className="px-12 py-2.5 sm:px-14 rounded-lg bg-primary text-white 
-                     hover:bg-blue-700 transition text-sm sm:text-base"
+                     hover:bg-blue-700 transition text-sm sm:text-base cursor-pointer"
         >
           Get Started
         </button>
         <button
           className="px-8 py-2.5 rounded-lg border border-gray-300 
-                     hover:bg-gray-100 transition text-sm sm:text-base"
+                     hover:bg-gray-100 transition text-sm sm:text-base cursor-pointer"
         >
           Watch Demo
         </button>
@@ -79,10 +78,6 @@ const Hero = () => {
         <InfiniteLogo />
       </div>
 
-      {/* Features Section */}
-      <div className="mt-16 w-full">
-        <Features />
-      </div>
     </section>
   );
 };

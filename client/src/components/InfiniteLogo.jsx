@@ -38,7 +38,7 @@ const logos = [
 export default function InfiniteLogo() {
   return (
    <div className="w-screen sm:max-w-5xl py-4 overflow-hidden">
-      <div className="relative w-full overflow-hidden mx-8 sm:mx-0">
+      <div className="relative w-full overflow-hidden mx-4 sm:mx-0">
         <div className="flex animate-marquee whitespace-nowrap">
           {[...logos, ...logos].map((logo, idx) => (
             <div

@@ -61,10 +61,10 @@ const Navbar = () => {
         
         {/* Logo */}
         <div className="flex ">
-        <img src={assets.Zzlogo} alt="" className="w-14 -mt-3 -me-2" />
+        <img src={assets.Zzlogo} alt="" className="w-14 -mt-3 -me-2 cursor-pointer select-none" />
         <div
           onClick={() => handleNavClick("/")}
-          className="cursor-pointer text-2xl sm:text-3xl font-bold hover:opacity-80 transition-opacity"
+          className="cursor-pointer text-2xl sm:text-3xl font-bold hover:opacity-80 transition-opacity select-none"
           style={{
             fontFamily: "Poppins, sans-serif",
             fontWeight: "800",
@@ -116,7 +116,7 @@ const Navbar = () => {
         <div className="md:hidden flex items-center gap-3">
           {user && <UserButton />}
           <button
-            className="hamburger-button p-2 text-gray-700 hover:text-blue-600 transition-colors"
+            className="hamburger-button p-2 text-gray-700 hover:text-blue-600 transition-colors cursor-pointer"
             onClick={(e) => {
               e.stopPropagation(); // prevent immediate close
               setIsMobileMenuOpen(!isMobileMenuOpen);
