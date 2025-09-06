@@ -48,7 +48,7 @@ const Testimonial = () => {
         <div className="flex flex-col">
           <div className="flex items-center gap-1">
             <p>{card.name}</p>
-           <BadgeCheck size={16} className="text-sky-500" />
+            <BadgeCheck size={14} className="text-sky-500" />
           </div>
           <span className="text-xs text-slate-500">{card.handle}</span>
         </div>
@@ -62,7 +62,7 @@ const Testimonial = () => {
             target="_blank"
             className="hover:text-sky-500"
           >
-           <Twitter size={14} className="text-slate-500 hover:text-sky-500" />
+            <Twitter size={12} className="text-slate-500 hover:text-sky-500" />
           </a>
         </div>
         <p>{card.date}</p>
@@ -73,11 +73,11 @@ const Testimonial = () => {
   return (
     <>
       {/* Headline */}
-      <div className="max-w-2xl mx-auto text-center mb-10">
+      <div className="max-w-2xl mx-auto text-center mb-10 sm:mt-10 mt-2">
         <h1 className="text-3xl md:text-4xl font-bold text-gray-700">
           What Our Users Say
         </h1>
-        <p className="text-sm md:text-base text-gray-500 mt-4">
+        <p className="text-sm md:text-base text-gray-500 mt-2">
           Hear from professionals who boosted their skills and careers with our
           AI tools.
         </p>

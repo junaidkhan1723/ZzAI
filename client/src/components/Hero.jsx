@@ -18,12 +18,12 @@ const Hero = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setIndex((prev) => (prev + 1) % subheadings.length);
-    }, 3000);
+    }, 4000);
     return () => clearInterval(interval);
   }, [subheadings.length]);
 
   return (
-    <section
+    <section id="home"
       className="relative flex flex-col items-center justify-center 
                  min-h-screen  px-4 sm:px-12 lg:px-24 
                  text-center bg-[url(/gradientBackground.png)] bg-cover bg-no-repeat"
