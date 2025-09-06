@@ -20,7 +20,7 @@ const Card = ({ icon: Icon, title, description, badge }) => {
             <CheckCircle className="w-3 h-3" />
           ) : (
             <Crown className="w-3 h-3" />
-            // Or use: <Lock className="w-3 h-3" />
+
           )}
           {badge}
         </span>

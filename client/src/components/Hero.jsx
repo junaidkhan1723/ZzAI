@@ -23,7 +23,7 @@ const Hero = () => {
   }, [subheadings.length]);
 
   return (
-    <section id="home"
+    <section id
       className="relative flex flex-col items-center justify-center 
                  min-h-screen  px-4 sm:px-12 lg:px-24 
                  text-center bg-[url(/gradientBackground.png)] bg-cover bg-no-repeat"
