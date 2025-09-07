@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Protect, useClerk, useUser } from "@clerk/clerk-react";
 import {
   House,
@@ -28,11 +28,23 @@ const Sidebar = ({ sidebar, setSidebar }) => {
   const { user } = useUser();
   const { signOut, openUserProfile } = useClerk();
 
+  // Disable scroll on small screens when sidebar is open
+  useEffect(() => {
+    if (sidebar) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "";
+    }
+    return () => {
+      document.body.style.overflow = "";
+    };
+  }, [sidebar]);
+
   return (
     <div
       className={`w-60 bg-white border-r border-gray-200 flex flex-col justify-between items-center
-        fixed top-14 bottom-0 left-0 transform transition-transform duration-300 ease-in-out
-        max-sm:z-50
+         top-14 bottom-0 left-0 transform transition-transform duration-300 ease-in-out
+        max-sm:absolute
         ${sidebar ? "translate-x-0" : "-translate-x-full"} 
         sm:translate-x-0`}
     >

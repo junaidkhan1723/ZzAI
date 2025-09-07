@@ -106,12 +106,12 @@ const Features = () => {
               }`}
               style={{ transitionDelay: `${index * 150}ms` }}
             >
-              <Card {...feature} />
+              <Card {...feature}  />
             </div>
           ))}
         </div>
       </div>
-    </section>
+    </section >
   );
 };
 
