@@ -60,7 +60,7 @@ const WriteArticle = () => {
 
         <button
           className="w-full flex justify-center items-center gap-2 bg-gradient-to-r
-        from-blue-600 to-indigo-500 text-white px-4 p-2 mt-6 text-sm rounded-lg cursor-pointer transition-all "
+        from-blue-600 to-blue-500 text-white px-4 p-2 mt-6 text-sm rounded-lg cursor-pointer transition-all "
         >
           <Edit className="w-5" />
           Generate Article
