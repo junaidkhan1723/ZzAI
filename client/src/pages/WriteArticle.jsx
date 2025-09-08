@@ -16,71 +16,92 @@ const WriteArticle = () => {
   };
 
   return (
-    <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-slate-700">
-      {/** left col */}
+    <div className="h-full p-6 flex flex-col lg:flex-row gap-6 text-slate-700">
+      {/** Left col */}
       <form
         onSubmit={onSubmitHandler}
-        action=""
-        className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200"
+        className="flex-1 max-w-xl w-full bg-gradient-to-b from-blue-50 to-white 
+        shadow-md rounded-2xl p-6 border border-blue-100"
       >
-        <div className="flex items-center gap-3">
-          <Sparkles className="w-6 text-blue-600" />
-          <h1 className="text-xl font-semibold">Article Configuration</h1>
+        {/* Header */}
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-6 h-6 text-blue-600" />
+          <h1 className="text-lg sm:text-xl font-bold text-blue-700">
+            Article Configuration
+          </h1>
         </div>
-        <p className="mt-6 text-sm font-medium">Article Topic</p>
 
+        {/* Article Topic */}
+        <label className="block mt-6 text-sm font-medium text-gray-700">
+          Article Topic
+        </label>
         <input
           onChange={(e) => setInput(e.target.value)}
           value={input}
           type="text"
-          className="w-full p-2 px-3 mt-2 outline-none text-sm rounded-md border border-gray-300"
-          placeholder="The Future Of artificial intelligence is..."
+          className="w-full mt-2 p-3 text-sm rounded-xl border border-gray-300
+          focus:outline-none focus:ring-2 focus:ring-blue-400"
+          placeholder="The Future of Artificial Intelligence..."
           required
         />
 
-        <p className="mt-4 text-sm font-medium">Article Length</p>
-
-        <div className="mt-3 gap-3 flex flex-wrap sm:max-w-9/11">
+        {/* Article Length */}
+        <label className="block mt-6 text-sm font-medium text-gray-700">
+          Article Length
+        </label>
+        <div className="mt-3 flex flex-wrap gap-2">
           {articleLength.map((item, index) => (
-            <span
+            <button
+              type="button"
               onClick={() => setSelectedLength(item)}
               key={index}
-              className={`text-xs px-4 py-1 border rounded-full cursor-pointer 
+              className={`px-4 py-1.5 text-xs sm:text-sm rounded-full border transition-all cursor-pointer
                 ${
                   selectedLength.text === item.text
-                    ? "bg-blue-50 text-blue-700"
-                    : "text-gray-500 border-gray-300"
-                } `}
+                    ? "bg-blue-600 text-white border-blue-600 shadow-sm"
+                    : "text-gray-600 border-gray-300 hover:border-blue-400"
+                }`}
             >
               {item.text}
-            </span>
+            </button>
           ))}
         </div>
-        <br />
 
+        {/* Submit Button */}
         <button
-          className="w-full flex justify-center items-center gap-2 bg-gradient-to-r
-        from-blue-600 to-blue-500 text-white px-4 p-2 mt-6 text-sm rounded-lg cursor-pointer transition-all "
+          type="submit"
+          className="w-full mt-8 flex justify-center items-center gap-2 
+          bg-blue-600 hover:bg-blue-700 text-white px-4 py-3 text-sm 
+          font-medium rounded-xl transition-all shadow-md cursor-pointer"
         >
-          <Edit className="w-5" />
+          <Edit className="w-4 h-4" />
           Generate Article
         </button>
       </form>
-      {/** right col */}
 
-      <div className="w-full max-w-lg p-4  bg-white rounded-lg flex flex-col border
-      border-gray-200 min-h-96 max-h-[600px]">
-        <div className="flex items-center gap-3">
-          <Edit className="w-5 h-5 text-blue-600"/>
-          <h1 className="text-xl font-semibold">Generated article</h1>
+      {/** Right col */}
+      <div
+        className="flex-1 max-w-xl w-full bg-white shadow-md rounded-2xl p-6 
+        border border-gray-100 min-h-[24rem] flex flex-col"
+      >
+        <div className="flex items-center gap-2">
+          <Edit className="w-6 h-6 text-blue-600" />
+          <h1 className="text-lg sm:text-xl font-bold text-blue-700">
+            Generated Article
+          </h1>
         </div>
 
         <div className="flex-1 flex justify-center items-center">
-            <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
-                       <Edit className="w-9 h-9"/>
-                      <p>Enter a topic and click "Generate article" to get started</p>
- 
-            </div>
+          <div className="text-sm flex flex-col items-center gap-4 text-gray-400">
+            <Edit className="w-10 h-10" />
+            <p className="text-center max-w-sm">
+              Enter a topic and select a length, then click{" "}
+              <span className="font-semibold text-blue-500">
+                "Generate Article"
+              </span>{" "}
+              to get started.
+            </p>
+          </div>
         </div>
       </div>
     </div>

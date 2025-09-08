@@ -8,7 +8,6 @@ const GenerateImages = () => {
     "Anime-style",
     "Cartoon-style",
     "Fantasy-style",
-    "Realistic-style",
     "3D-style",
     "Portrait-style",
   ];
@@ -22,90 +21,109 @@ const GenerateImages = () => {
   };
 
   return (
-    <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-slate-700">
-      {/** left col */}
+    <div className="h-full p-6 flex flex-col lg:flex-row gap-6 text-slate-700">
+      {/* Left col */}
       <form
         onSubmit={onSubmitHandler}
-        action=""
-        className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200"
+        className="flex-1 max-w-xl w-full bg-gradient-to-b from-green-50 to-white 
+        shadow-md rounded-2xl p-6 border border-green-100"
       >
-        <div className="flex items-center gap-3">
-          <Sparkles className="w-6 text-green-600" />
-          <h1 className="text-xl font-semibold">AI Image Generator</h1>
+        {/* Header */}
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-6 h-6 text-green-600" />
+          <h1 className="text-lg sm:text-xl font-bold text-green-700">
+            AI Image Generator
+          </h1>
         </div>
-        <p className="mt-6 text-sm font-medium">Describe Your Image</p>
 
+        {/* Input */}
+        <label className="block mt-6 text-sm font-medium text-gray-700">
+          Describe Your Image
+        </label>
         <textarea
           onChange={(e) => setInput(e.target.value)}
           value={input}
           rows={4}
-          className="w-full p-2 px-3 mt-2 outline-none text-sm rounded-md border border-gray-300"
-          placeholder="Describe what you want to see in the image."
+          className="w-full mt-2 p-3 text-sm rounded-xl border border-gray-300
+          focus:outline-none focus:ring-2 focus:ring-green-400 resize-none"
+          placeholder="A futuristic city skyline at sunset..."
           required
         />
 
-        <p className="mt-4 text-sm font-medium">Style</p>
-
-        <div className="mt-3 gap-3 flex flex-wrap sm:max-w-9/11">
+        {/* Styles */}
+        <label className="block mt-6 text-sm font-medium text-gray-700">
+          Choose Style
+        </label>
+        <div className="mt-3 flex flex-wrap gap-2">
           {imageStyle.map((item) => (
-            <span
+            <button
+              type="button"
               onClick={() => setSelectedStyle(item)}
               key={item}
-              className={`text-xs px-4 py-1 border rounded-full cursor-pointer 
+              className={`px-4 py-1.5 text-xs sm:text-sm rounded-full border transition-all 
                 ${
                   selectedStyle === item
-                    ? "bg-green-50 text-green-700"
-                    : "text-gray-500 border-gray-300"
-                } `}
+                    ? "bg-green-600 text-white border-green-600 shadow-sm"
+                    : "text-gray-600 border-gray-300 hover:border-green-400 cursor-pointer"
+                }`}
             >
               {item}
-            </span>
+            </button>
           ))}
         </div>
 
+        {/* Public toggle */}
         <div className="my-6 flex items-center gap-2">
           <label className="relative cursor-pointer">
             <input
               type="checkbox"
-              onChange={(e) => setPublish(e.target.check)}
+              onChange={(e) => setPublish(e.target.checked)}
               checked={publish}
-              className="sr-only peer "
+              className="sr-only peer"
             />
-
             <div className="w-9 h-5 bg-slate-300 rounded-full peer-checked:bg-green-500 transition"></div>
-
             <span
               className="absolute left-1 top-1 w-3 h-3 bg-white rounded-full
               transition peer-checked:translate-x-4"
             ></span>
           </label>
-          <p className="text-sm">Make this image Public</p>
+          <p className="text-sm text-gray-700">Make this image public</p>
         </div>
-        <br />
 
+        {/* Button */}
         <button
-          className="w-full flex justify-center items-center gap-2 bg-gradient-to-r
-        from-green-600 to-green-500 text-white px-4 p-2 mt-6 text-sm rounded-lg cursor-pointer transition-all "
+          type="submit"
+          className="w-full flex justify-center items-center gap-2 bg-green-600 
+          hover:bg-green-700 text-white px-4 py-3 text-sm font-medium rounded-xl 
+          transition-all shadow-md cursor-pointer"
         >
-          <Image className="w-5" />
+          <Image className="w-4 h-4" />
           Generate Image
         </button>
       </form>
 
-      {/** right col */}
+      {/* Right col */}
       <div
-        className="w-full max-w-lg p-4  bg-white rounded-lg flex flex-col border
-      border-gray-200 min-h-96 "
+        className="flex-1 max-w-xl w-full bg-white shadow-md rounded-2xl p-6 
+        border border-gray-100 min-h-[24rem] flex flex-col"
       >
-        <div className="flex items-center gap-3">
-          <Image className="w-5 h-5 text-green-600" />
-          <h1 className="text-xl font-semibold">Generated Image</h1>
+        <div className="flex items-center gap-2">
+          <Image className="w-6 h-6 text-green-600" />
+          <h1 className="text-lg sm:text-xl font-bold text-green-700">
+            Generated Image
+          </h1>
         </div>
 
         <div className="flex-1 flex justify-center items-center">
-          <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
-            <Image className="w-9 h-9" />
-            <p>Enter a topic and click "Generate Image" to get started</p>
+          <div className="text-sm flex flex-col items-center gap-4 text-gray-400">
+            <Image className="w-10 h-10" />
+            <p className="text-center max-w-sm">
+              Describe your idea, choose a style, and click{" "}
+              <span className="font-semibold text-green-500">
+                "Generate Image"
+              </span>{" "}
+              to bring your imagination to life.
+            </p>
           </div>
         </div>
       </div>

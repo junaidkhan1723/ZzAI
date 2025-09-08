@@ -13,7 +13,7 @@ const BolgTitles = () => {
     "Food",
   ];
 
-  const [selectedCategories, setSelectedCategories] = useState('General');
+  const [selectedCategories, setSelectedCategories] = useState("General");
   const [input, setInput] = useState("");
 
   const onSubmitHandler = async (e) => {
@@ -21,72 +21,91 @@ const BolgTitles = () => {
   };
 
   return (
-    <div className="h-full overflow-y-scroll p-6 flex items-start flex-wrap gap-4 text-slate-700">
-      {/** left col */}
+    <div className="h-full p-6 flex flex-col lg:flex-row gap-6 text-slate-700">
+      {/** Left Section */}
       <form
         onSubmit={onSubmitHandler}
-        action=""
-        className="w-full max-w-lg p-4 bg-white rounded-lg border border-gray-200"
+        className="flex-1 max-w-xl w-full bg-gradient-to-b from-purple-100 to-white 
+        shadow-md rounded-2xl p-6 border border-purple-100"
       >
-        <div className="flex items-center gap-3">
-          <Sparkles className="w-6 text-purple-600" />
-          <h1 className="text-xl font-semibold">AI Title Generator</h1>
+        {/* Header */}
+        <div className="flex items-center gap-2">
+          <Sparkles className="w-6 h-6 text-purple-600" />
+          <h1 className="text-lg sm:text-xl font-bold text-purple-700">
+            AI Title Generator
+          </h1>
         </div>
-        <p className="mt-6 text-sm font-medium">Keyword</p>
 
+        {/* Keyword Input */}
+        <label className="block mt-6 text-sm font-medium text-gray-700">
+          Keyword
+        </label>
         <input
           onChange={(e) => setInput(e.target.value)}
           value={input}
           type="text"
-          className="w-full p-2 px-3 mt-2 outline-none text-sm rounded-md border border-gray-300"
-          placeholder="The Future Of artificial intelligence is..."
+          className="w-full mt-2 p-3 text-sm rounded-xl border border-gray-300
+          focus:outline-none focus:ring-2 focus:ring-purple-400"
+          placeholder="The Future of Artificial Intelligence..."
           required
         />
 
-        <p className="mt-4 text-sm font-medium">Category</p>
-
-        <div className="mt-3 gap-3 flex flex-wrap sm:max-w-9/11">
+        {/* Category Selection */}
+        <label className="block mt-6 text-sm font-medium text-gray-700">
+          Category
+        </label>
+        <div className="mt-3 flex flex-wrap gap-2">
           {blogCategories.map((item) => (
-            <span
-              onClick={() => setSelectedCategories(item)}
+            <button
+              type="button"
               key={item}
-              className={`text-xs px-4 py-1 border rounded-full cursor-pointer 
+              onClick={() => setSelectedCategories(item)}
+              className={`px-4 py-1.5 text-xs sm:text-sm rounded-full border transition-all cursor-pointer
                 ${
                   selectedCategories === item
-                    ? "bg-purple-50 text-purple-700"
-                    : "text-gray-500 border-gray-300"
-                } `}
+                    ? "bg-purple-600 text-white border-purple-600 shadow-md"
+                    : "text-gray-600 border-gray-300 hover:border-purple-400"
+                }`}
             >
               {item}
-            </span>
+            </button>
           ))}
         </div>
-        <br />
 
+        {/* Submit Button */}
         <button
-          className="w-full flex justify-center items-center gap-2 bg-gradient-to-r
-        from-purple-600 to-purple-500 text-white px-4 p-2 mt-6 text-sm rounded-lg cursor-pointer transition-all "
+          type="submit"
+          className="w-full mt-8 flex justify-center items-center gap-2 
+          bg-purple-600 hover:bg-purple-700 text-white px-4 py-3 text-sm 
+          font-medium rounded-xl transition-all shadow-md cursor-pointer"
         >
-          <Hash className="w-5" />
+          <Hash className="w-4 h-4" />
           Generate Title
         </button>
       </form>
 
-
-      {/** right col */}
+      {/** Right Section */}
       <div
-        className="w-full max-w-lg p-4  bg-white rounded-lg flex flex-col border
-      border-gray-200 min-h-96 "
+        className="flex-1 max-w-xl w-full bg-white shadow-md rounded-2xl p-6 
+        border border-gray-100 min-h-[24rem] flex flex-col"
       >
-        <div className="flex items-center gap-3">
-          <Hash className="w-5 h-5 text-purple-600" />
-          <h1 className="text-xl font-semibold">Generated titles</h1>
+        <div className="flex items-center gap-2">
+          <Hash className="w-6 h-6 text-purple-600" />
+          <h1 className="text-lg sm:text-xl font-bold text-purple-700">
+            Generated Titles
+          </h1>
         </div>
 
         <div className="flex-1 flex justify-center items-center">
-          <div className="text-sm flex flex-col items-center gap-5 text-gray-400">
-            <Hash className="w-9 h-9" />
-            <p>Enter a topic and click "Generate Title" to get started</p>
+          <div className="text-sm flex flex-col items-center gap-4 text-gray-400">
+            <Hash className="w-10 h-10" />
+            <p className="text-center max-w-sm">
+              Enter a keyword and select a category, then click{" "}
+              <span className="font-semibold text-purple-500">
+                "Generate Title"
+              </span>{" "}
+              to get started.
+            </p>
           </div>
         </div>
       </div>
