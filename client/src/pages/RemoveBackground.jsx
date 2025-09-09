@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Scissors, Sparkles } from "lucide-react";
 
 const RemoveBackground = () => {
-  const [input, setInput] = useState("");
+  const [input, setInput] = useState(null);
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
@@ -13,7 +13,7 @@ const RemoveBackground = () => {
       {/* Left Column */}
       <form
         onSubmit={onSubmitHandler}
-        className="flex-1 w-full max-w-lg mx-auto p-6 bg-gradient-to-b from-orange-50 to-white  shadow-md rounded-2xl border border-gray-100"
+        className="flex-1 w-full max-w-lg mx-auto p-6 bg-gradient-to-b from-orange-50 to-white shadow-md rounded-2xl border border-gray-100"
       >
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="w-6 h-6 text-orange-500" />
@@ -55,15 +55,24 @@ const RemoveBackground = () => {
           </h1>
         </div>
 
+        {/* Preview or Placeholder */}
         <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <div className="flex flex-col items-center gap-4 text-gray-400">
-            <Scissors className="w-10 h-10" />
-            <p className="text-sm">
-              Upload an image and click{" "}
-              <span className="font-medium text-orange-500">"Remove Background"</span> to see
-              results
-            </p>
-          </div>
+          {input ? (
+            <img
+              src={URL.createObjectURL(input)}
+              alt="Uploaded Preview"
+              className="max-h-80 rounded-xl shadow-md border border-gray-200 object-contain"
+            />
+          ) : (
+            <div className="flex flex-col items-center gap-4 text-gray-400">
+              <Scissors className="w-10 h-10" />
+              <p className="text-sm">
+                Upload an image and click{" "}
+                <span className="font-medium text-orange-500">"Remove Background"</span>{" "}
+                to see results
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>

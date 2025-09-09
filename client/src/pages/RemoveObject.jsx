@@ -7,7 +7,6 @@ const RemoveObject = () => {
 
   const onSubmitHandler = async (e) => {
     e.preventDefault();
-
   };
 
   return (
@@ -64,16 +63,24 @@ const RemoveObject = () => {
           <h1 className="text-lg font-semibold text-gray-800">Processed Image</h1>
         </div>
 
-        {/* Placeholder */}
+        {/* Image Preview or Placeholder */}
         <div className="flex-1 flex flex-col justify-center items-center text-center">
-          <div className="flex flex-col items-center gap-4 text-gray-400">
-            <Eraser className="w-10 h-10" />
-            <p className="text-sm">
-              Upload an image and click{" "}
-              <span className="font-medium text-fuchsia-500">"Remove Object"</span>{" "}
-              to see results
-            </p>
-          </div>
+          {image ? (
+            <img
+              src={URL.createObjectURL(image)}
+              alt="Uploaded Preview"
+              className="max-h-80 rounded-xl shadow-md border border-gray-200 object-contain"
+            />
+          ) : (
+            <div className="flex flex-col items-center gap-4 text-gray-400">
+              <Eraser className="w-10 h-10" />
+              <p className="text-sm">
+                Upload an image and click{" "}
+                <span className="font-medium text-fuchsia-500">"Remove Object"</span>{" "}
+                to see results
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
