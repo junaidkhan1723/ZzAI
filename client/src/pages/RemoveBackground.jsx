@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Eraser, Sparkles } from "lucide-react";
+import { Scissors, Sparkles } from "lucide-react";
 
 const RemoveBackground = () => {
   const [input, setInput] = useState("");
@@ -17,7 +17,7 @@ const RemoveBackground = () => {
       >
         <div className="flex items-center gap-2 mb-4">
           <Sparkles className="w-6 h-6 text-orange-500" />
-          <h1 className="text-xl font-semibold text-gray-800">
+          <h1 className="text-xl font-semibold text-orange-800">
             Background Removal
           </h1>
         </div>
@@ -41,7 +41,7 @@ const RemoveBackground = () => {
           type="submit"
           className="w-full mt-6 flex justify-center items-center gap-2 rounded-lg bg-gradient-to-r from-orange-500 to-orange-600 px-4 py-2 text-sm font-medium text-white shadow hover:from-orange-600 hover:to-orange-700 transition-all cursor-pointer"
         >
-          <Eraser className="w-5 h-5" />
+          <Scissors className="w-5 h-5" />
           Remove Background
         </button>
       </form>
@@ -49,7 +49,7 @@ const RemoveBackground = () => {
       {/* Right Column */}
       <div className="flex-1 w-full max-w-lg mx-auto p-6 bg-white shadow-md rounded-2xl border border-gray-100 flex flex-col">
         <div className="flex items-center gap-2 mb-4">
-          <Eraser className="w-5 h-5 text-orange-500" />
+          <Scissors className="w-5 h-5 text-orange-500" />
           <h1 className="text-lg font-semibold text-gray-800">
             Processed Image
           </h1>
@@ -57,10 +57,10 @@ const RemoveBackground = () => {
 
         <div className="flex-1 flex flex-col justify-center items-center text-center">
           <div className="flex flex-col items-center gap-4 text-gray-400">
-            <Eraser className="w-10 h-10" />
+            <Scissors className="w-10 h-10" />
             <p className="text-sm">
               Upload an image and click{" "}
-              <span className="font-medium">"Remove Background"</span> to see
+              <span className="font-medium text-orange-500">"Remove Background"</span> to see
               results
             </p>
           </div>
