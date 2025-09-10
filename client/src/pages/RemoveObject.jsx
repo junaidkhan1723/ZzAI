@@ -10,11 +10,12 @@ const RemoveObject = () => {
   };
 
   return (
-    <div className="h-full overflow-y-auto p-6 flex flex-col lg:flex-row gap-6 text-slate-700 bg-gray-50">
+    <div className="h-full p-6 flex flex-col lg:flex-row gap-6 text-slate-700">
       {/* Left Column */}
       <form
         onSubmit={onSubmitHandler}
-        className="flex-1 w-full max-w-lg mx-auto p-6 bg-gradient-to-b from-fuchsia-50 to-white shadow-md rounded-2xl border border-gray-100"
+        className="flex-1 max-w-xl w-full bg-gradient-to-b from-fuchsia-50 to-white 
+        shadow-md rounded-2xl p-6 border border-fuchsia-100"
       >
         {/* Title */}
         <div className="flex items-center gap-2 mb-4">
@@ -56,11 +57,12 @@ const RemoveObject = () => {
       </form>
 
       {/* Right Column */}
-      <div className="flex-1 w-full max-w-lg mx-auto p-6 bg-white shadow-md rounded-2xl border border-gray-100 flex flex-col">
+      <div className="flex-1 max-w-xl w-full bg-white shadow-md rounded-2xl p-6 
+        border border-gray-100 min-h-[24rem] flex flex-col">
         {/* Title */}
         <div className="flex items-center gap-2 mb-4">
           <Eraser className="w-5 h-5 text-fuchsia-500" />
-          <h1 className="text-lg font-semibold text-gray-800">Processed Image</h1>
+          <h1 className="text-lg sm:text-xl font-bold text-fuchsia-700">Processed Image</h1>
         </div>
 
         {/* Image Preview or Placeholder */}
