@@ -4,6 +4,7 @@ import { clerkClient } from "@clerk/express";
 import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import FormData from "form-data";
+import fs from "fs";
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -108,7 +109,6 @@ export const generateImage = async (req, res) => {
     const { userId } = req.auth();
     const { prompt, publish } = req.body;
     const plan = req.plan;
-    const free_usage = req.free_usage;
 
     if (plan !== "premium") {
       return res.json({
@@ -145,9 +145,122 @@ export const generateImage = async (req, res) => {
       VALUES (${userId}, ${prompt}, ${secure_url}, 'image', ${publish ?? false})
     `;
 
-    res.json({ success: true, secure_url });
+    res.json({ success: true, content: secure_url });
   } catch (error) {
     console.log(error.message);
     res.json({ success: false, message: error.message });
   }
 };
+
+// removeImagebackground
+export const removeImageBackground = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const { image } = req.file;
+    const plan = req.plan;
+
+    if (plan !== "premium") {
+      return res.json({
+        success: false,
+        message: "This feature is only available for premium subscriptions",
+      });
+    }
+
+    // Upload to Cloudinary
+    const { secure_url } = await cloudinary.uploader.upload(image.path, {
+      transformation: [
+        {
+          effect: "background_removal",
+          background_removal: "remove_the_background",
+        },
+      ],
+    });
+
+    // Save  to database
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type) 
+      VALUES (${userId}, 'Remove background like an expert from image', ${secure_url}, 'image')
+    `;
+
+    res.json({ success: true, content: secure_url });
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
+// removeobject
+export const removeImageObject = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const { object } = req.body();
+    const { image } = req.file;
+    const plan = req.plan;
+
+    if (plan !== "premium") {
+      return res.json({
+        success: false,
+        message: "This feature is only available for premium subscriptions",
+      });
+    }
+
+    // Upload to Cloudinary
+    const { public_id } = await cloudinary.uploader.upload(image.path);
+
+   const imageUrl = cloudinary.url(public_id, {
+      transformation: [{
+        effect : `gen_remove: ${object}`
+      }],
+      resource_type: 'image'
+    })
+
+    // Save  to database
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type) 
+      VALUES (${userId}, ${`Remove ${object} like an expert from image`}, ${imageUrl}, 'image')
+    `;
+
+    res.json({ success: true, content: imageUrl });
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
+// resumeReview
+export const resumeReview = async (req, res) => {
+  try {
+    const { userId } = req.auth();
+    const resume = req.file;
+    const plan = req.plan;
+
+    if (plan !== "premium") {
+      return res.json({
+        success: false,
+        message: "This feature is only available for premium subscriptions",
+      });
+    }
+
+    //file size
+
+    if(resume.size  > 5 * 1024 * 1024){
+      return res.json({success: false, message: "Resume file size exceeds allowed size(5MB)."})
+    }
+
+    const dataBuffer = fs.readFileSync(resume.path)
+    // Save  to database
+    await sql`
+      INSERT INTO creations (user_id, prompt, content, type) 
+      VALUES (${userId}, ${`Remove ${object} like an expert from image`}, ${imageUrl}, 'image')
+    `;
+
+    res.json({ success: true, content: imageUrl });
+  } catch (error) {
+    console.log(error.message);
+    res.json({ success: false, message: error.message });
+  }
+};
+
+
