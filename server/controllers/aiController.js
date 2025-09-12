@@ -5,6 +5,7 @@ import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import FormData from "form-data";
 import fs from "fs";
+import pdf from "pdf-parse/lib/pdf-parse.js";
 
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
@@ -189,7 +190,6 @@ export const removeImageBackground = async (req, res) => {
   }
 };
 
-
 // removeobject
 export const removeImageObject = async (req, res) => {
   try {
@@ -208,12 +208,14 @@ export const removeImageObject = async (req, res) => {
     // Upload to Cloudinary
     const { public_id } = await cloudinary.uploader.upload(image.path);
 
-   const imageUrl = cloudinary.url(public_id, {
-      transformation: [{
-        effect : `gen_remove: ${object}`
-      }],
-      resource_type: 'image'
-    })
+    const imageUrl = cloudinary.url(public_id, {
+      transformation: [
+        {
+          effect: `gen_remove: ${object}`,
+        },
+      ],
+      resource_type: "image",
+    });
 
     // Save  to database
     await sql`
@@ -227,7 +229,6 @@ export const removeImageObject = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
 
 // resumeReview
 export const resumeReview = async (req, res) => {
@@ -245,16 +246,36 @@ export const resumeReview = async (req, res) => {
 
     //file size
 
-    if(resume.size  > 5 * 1024 * 1024){
-      return res.json({success: false, message: "Resume file size exceeds allowed size(5MB)."})
+    if (resume.size > 5 * 1024 * 1024) {
+      return res.json({
+        success: false,
+        message: "Resume file size exceeds allowed size(5MB).",
+      });
     }
 
-    const dataBuffer = fs.readFileSync(resume.path)
+    const dataBuffer = fs.readFileSync(resume.path);
+    const pdfData = await pdf(dataBuffer);
+
+    const prompt = `Review the following resume and provide constructive feedback on its strengths, weaknesses, and areas for improvements. Resuem Content:\n\n${pdfData.text}`;
+
+    const response = await AI.chat.completions.create({
+      model: "gemini-2.0-flash",
+      messages: [
+        {
+          role: "user",
+          content: prompt,
+        },
+      ],
+      temperature: 0.7,
+      max_tokens: 1000,
+    });
+
+    const content = response.choices[0].message.content;
+
     // Save  to database
     await sql`
       INSERT INTO creations (user_id, prompt, content, type) 
-      VALUES (${userId}, ${`Remove ${object} like an expert from image`}, ${imageUrl}, 'image')
-    `;
+      VALUES (${userId},'Review the uploaded resume', ${content}, 'resume-review')`;
 
     res.json({ success: true, content: imageUrl });
   } catch (error) {
@@ -262,5 +283,3 @@ export const resumeReview = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
-
-
