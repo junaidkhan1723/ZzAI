@@ -5,7 +5,6 @@ import axios from "axios";
 import { v2 as cloudinary } from "cloudinary";
 import FormData from "form-data";
 
-
 const AI = new OpenAI({
   apiKey: process.env.GEMINI_API_KEY,
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
@@ -103,7 +102,7 @@ export const generateBlogTitle = async (req, res) => {
   }
 };
 
-
+// generateImage
 export const generateImage = async (req, res) => {
   try {
     const { userId } = req.auth();
