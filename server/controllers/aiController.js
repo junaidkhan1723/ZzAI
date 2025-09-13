@@ -143,7 +143,7 @@ export const generateImage = async (req, res) => {
 export const removeImageBackground = async (req, res) => {
   try {
     const { userId } = req.auth();
-    const { plan } = req;
+    const { plan } = req.plan;
     const image = req.file; 
 
     if (plan !== "premium") {
