@@ -55,7 +55,7 @@ const Hero = () => {
         <button
           onClick={() => navigate("/ai")}
           className="px-12 py-2.5 sm:px-14 rounded-lg bg-primary text-white 
-                     hover:bg-blue-700 transition text-sm sm:text-base cursor-pointer"
+                     hover:bg-blue-800 transition text-sm sm:text-base cursor-pointer"
         >
           Get Started
         </button>
