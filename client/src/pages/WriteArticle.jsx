@@ -249,8 +249,9 @@ const ArticleForm = ({
 const GeneratedArticlePanel = ({ content, loading, wordCount, charCount }) => (
   <div
     className="flex-1 max-w-xl w-full bg-white shadow-md rounded-2xl p-6 
-      border border-gray-100 min-h-[24rem] flex flex-col relative"
+      border border-gray-100 min-h-[24rem] relative flex flex-col"
   >
+    {/* Header */}
     <div className="flex items-center justify-between">
       <div className="flex items-center gap-2">
         <Edit className="w-6 h-6 text-blue-600" />
@@ -261,7 +262,8 @@ const GeneratedArticlePanel = ({ content, loading, wordCount, charCount }) => (
       <CopyButton content={content} />
     </div>
 
-    <div className="mt-3 h-full overflow-y-auto text-sm text-slate-600">
+    {/* Content area */}
+    <div className="mt-3 h-full overflow-y-auto text-sm text-slate-600 relative">
       {loading ? (
         <div className="animate-pulse space-y-4">
           <div className="h-4 bg-gray-200 rounded w-3/4"></div>
@@ -270,7 +272,7 @@ const GeneratedArticlePanel = ({ content, loading, wordCount, charCount }) => (
           <div className="h-4 bg-gray-200 rounded w-1/2"></div>
         </div>
       ) : !content ? (
-        <div className="flex-1 flex justify-center items-center">
+        <div className="absolute inset-0 flex justify-center items-center">
           <div className="text-sm flex flex-col items-center gap-4 text-gray-400">
             <Edit className="w-10 h-10" />
             <p className="text-center max-w-sm">
@@ -293,5 +295,6 @@ const GeneratedArticlePanel = ({ content, loading, wordCount, charCount }) => (
     </div>
   </div>
 );
+
 
 export default WriteArticle;
