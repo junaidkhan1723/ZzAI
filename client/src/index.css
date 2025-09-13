@@ -12,6 +12,15 @@
     --color-primary: #5044E5;
 }
 
+/* disable tailwind*/
+.reset-tw, .reset-tw *{
+  all: revert !important;
+}
+
+.cl-drawerRoot{
+  z-index: 50;
+}
+
 /* navbar*/
 @keyframes fade-in-up {
           from {
@@ -54,10 +63,3 @@
   }
 }
 
-.reset-tw, .reset-tw *{
-  all: revert !important;
-}
-
-.cl-drawerRoot{
-  z-index: 50;
-}
