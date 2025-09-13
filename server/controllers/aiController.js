@@ -14,7 +14,6 @@ const AI = new OpenAI({
 
 
 // Generate Article
-
 export const generateArticle = async (req, res) => {
   try {
     const { userId } = req.auth(); 
@@ -56,7 +55,6 @@ export const generateArticle = async (req, res) => {
 };
 
 // Generate Blog Title
-
 export const generateBlogTitle = async (req, res) => {
   try {
     const { userId } = req.auth();
@@ -99,7 +97,6 @@ export const generateBlogTitle = async (req, res) => {
 
 
 // Generate Image 
-
 export const generateImage = async (req, res) => {
   try {
     const { userId } = req.auth();
@@ -143,7 +140,6 @@ export const generateImage = async (req, res) => {
 
 
 // Remove Image Background
-
 export const removeImageBackground = async (req, res) => {
   try {
     const { userId } = req.auth();
@@ -177,7 +173,6 @@ export const removeImageBackground = async (req, res) => {
 
 
 // Remove Object from Image
-
 export const removeImageObject = async (req, res) => {
   try {
     const { userId } = req.auth();
@@ -213,7 +208,6 @@ export const removeImageObject = async (req, res) => {
 
 
 // Resume Review
-
 export const resumeReview = async (req, res) => {
   try {
     const { userId } = req.auth();
