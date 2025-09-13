@@ -15,11 +15,11 @@ import { NavLink } from "react-router-dom";
 
 const navItems = [
   { to: "/ai", label: "Dashboard", Icon: House },
-  { to: "/ai/blog-titles", label: "Title Generator", Icon: Type },
   { to: "/ai/write-article", label: "Article Writer", Icon: Edit3 },
-  { to: "/ai/remove-object", label: "Object Remover", Icon: Eraser },
+  { to: "/ai/blog-titles", label: "Title Generator", Icon: Type },
   { to: "/ai/generate-images", label: "Image Generator", Icon: Image },
   { to: "/ai/remove-background", label: "Background Remover", Icon: Scissors },
+  { to: "/ai/remove-object", label: "Object Remover", Icon: Eraser },
   { to: "/ai/review-resume", label: "Resume Reviewer", Icon: ClipboardCheck },
   { to: "/ai/community", label: "Community", Icon: User },
 ];
