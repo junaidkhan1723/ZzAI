@@ -33,7 +33,7 @@ const GenerateImages = () => {
     try {
       setLoading(true);
       setContent("");
-      const prompt = `${input}, ${selectedStyle}`;
+      const prompt = `Generate an image of ${input} in the style ${selectedStyle}`;
       const { data } = await axios.post(
         "/api/ai/generate-image",
         { prompt, publish },
@@ -56,6 +56,7 @@ const GenerateImages = () => {
     }
   };
 
+  //handleDownload
   const handleDownload = () => {
     const link = document.createElement("a");
     link.href = content;
