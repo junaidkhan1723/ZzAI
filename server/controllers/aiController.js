@@ -12,12 +12,12 @@ const AI = new OpenAI({
   baseURL: "https://generativelanguage.googleapis.com/v1beta/openai/",
 });
 
-// -----------------------------
+
 // Generate Article
-// -----------------------------
+
 export const generateArticle = async (req, res) => {
   try {
-    const { userId } = req.auth; 
+    const { userId } = req.auth(); 
     const { prompt, length } = req.body;
     const { plan, free_usage } = req;
 
@@ -55,12 +55,11 @@ export const generateArticle = async (req, res) => {
   }
 };
 
-// -----------------------------
 // Generate Blog Title
-// -----------------------------
+
 export const generateBlogTitle = async (req, res) => {
   try {
-    const { userId } = req.auth;
+    const { userId } = req.auth();
     const { prompt } = req.body;
     const { plan, free_usage } = req;
 
@@ -98,12 +97,12 @@ export const generateBlogTitle = async (req, res) => {
   }
 };
 
-// -----------------------------
-// Generate Image (ClipDrop + Cloudinary)
-// -----------------------------
+
+// Generate Image 
+
 export const generateImage = async (req, res) => {
   try {
-    const { userId } = req.auth;
+    const { userId } = req.auth();
     const { prompt, publish } = req.body;
     const { plan } = req;
 
@@ -142,14 +141,14 @@ export const generateImage = async (req, res) => {
   }
 };
 
-// -----------------------------
+
 // Remove Image Background
-// -----------------------------
+
 export const removeImageBackground = async (req, res) => {
   try {
-    const { userId } = req.auth;
+    const { userId } = req.auth();
     const { plan } = req;
-    const image = req.file; // ✅ fix
+    const image = req.file; 
 
     if (plan !== "premium") {
       return res.json({
@@ -176,12 +175,12 @@ export const removeImageBackground = async (req, res) => {
   }
 };
 
-// -----------------------------
+
 // Remove Object from Image
-// -----------------------------
+
 export const removeImageObject = async (req, res) => {
   try {
-    const { userId } = req.auth;
+    const { userId } = req.auth();
     const { object } = req.body; 
     const { plan } = req;
     const image = req.file;
@@ -212,12 +211,12 @@ export const removeImageObject = async (req, res) => {
   }
 };
 
-// -----------------------------
+
 // Resume Review
-// -----------------------------
+
 export const resumeReview = async (req, res) => {
   try {
-    const { userId } = req.auth;
+    const { userId } = req.auth();
     const resume = req.file;
     const { plan } = req;
 
@@ -254,7 +253,7 @@ export const resumeReview = async (req, res) => {
       VALUES (${userId}, 'Resume Review', ${content}, 'resume-review')
     `;
 
-    res.json({ success: true, content }); // ✅ fixed (was wrong with imageUrl)
+    res.json({ success: true, content });
   } catch (error) {
     console.error(error.message);
     res.json({ success: false, message: error.message });
