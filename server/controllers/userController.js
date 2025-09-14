@@ -60,3 +60,31 @@ export const toggleLikeCreation = async (req, res) => {
     res.json({ success: false, message: error.message });
   }
 };
+
+
+// deleteCreation
+export const deleteCreation = async (req, res) => {
+  try {
+    const { id } = req.params;
+
+    const { userId } = req.auth();
+    const userIdStr = userId?.toString();
+
+    const idNum = Number(id);
+
+    const result = await sql`
+      DELETE FROM creations
+      WHERE id = ${idNum} AND user_id = ${userIdStr}
+      RETURNING *;
+    `;
+
+    if (!result || result.length === 0) {
+      return res.status(404).json({ success: false, message: "Creation not found or not owned by you." });
+    }
+
+    return res.json({ success: true, message: "Creation deleted", deleted: result[0] });
+  } catch (err) {
+    console.error("deleteCreation error:", err);
+    return res.status(500).json({ success: false, message: "Failed to delete creation" });
+  }
+};
