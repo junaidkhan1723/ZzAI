@@ -37,23 +37,24 @@ const Community = () => {
   }, [user]);
 
   // Toggle like function
-  const toggleLike = (index) => {
-    if (!user) return;
-
-    setCreations((prev) =>
-      prev.map((creation, i) => {
-        if (i === index) {
-          const hasLiked = creation.likes.includes(user.id);
-          return {
-            ...creation,
-            likes: hasLiked
-              ? creation.likes.filter((id) => id !== user.id)
-              : [...creation.likes, user.id],
-          };
+  const imageLikeToggle = async (id) => {
+    try {
+      const { data } = await axios.post(
+        "/api/user/toggle-like-creation",
+        { id },
+        {
+          headers: { Authorization: `Bearer ${await getToken()}` },
         }
-        return creation;
-      })
-    );
+      );
+      if (data.success) {
+        toast.success(data.message);
+        await fetchCreations();
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   return !loading ? (
@@ -77,17 +78,23 @@ const Community = () => {
               <img
                 src={creation.content}
                 alt="Creation"
-                className="w-full h-64 object-cover rounded-lg"
+                className="w-full h-full object-cover rounded-lg"
               />
 
               {/* Overlay */}
-              <div className="absolute inset-0 flex flex-col justify-end p-3 bg-gradient-to-b from-transparent to-black/70 opacity-0 group-hover:opacity-100 transition-opacity">
-                <p className="text-sm text-white mb-2">{creation.prompt}</p>
+              <div
+                className="absolute bottom-0 top-0 right-0 left-0 flex gap-2 items-end justify-end 
+                            group-hover:justify-between group-hover:bg-gradient-to-b 
+                            from-transparent to-black/70 text-white rounded-lg"
+              >
+                <p className="text-sm hidden group-hover:block mb-2">
+                  {creation.prompt}
+                </p>
                 <div className="flex items-center gap-1 text-white">
                   <p>{creation.likes.length}</p>
                   <Heart
-                    onClick={() => toggleLike(index)}
-                    className={`w-5 h-5 hover:scale-110 transition-transform cursor-pointer ${
+                    onClick={() => imageLikeToggle(creation.id)}
+                    className={`min-w-5 h-5 hover:scale-110 transition-transform cursor-pointer ${
                       creation.likes.includes(user?.id)
                         ? "fill-red-500 text-red-600"
                         : "text-white"
