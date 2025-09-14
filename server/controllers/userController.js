@@ -6,7 +6,7 @@ export const getUserCreations = async (req, res) => {
     const { userId } = req.auth();
 
     const creations =
-      await sql`SELECT * FROM creations WHERE user_id = ${userId} ORDER BY created_at DESC`;
+      await sql`SELECT * FROM creations WHERE user_id = ${userId} ORDER BY create_at DESC`;
 
     res.json({ success: true, creations });
   } catch (error) {
@@ -18,7 +18,7 @@ export const getUserCreations = async (req, res) => {
 export const getPublishCreations = async (req, res) => {
   try {
     const creations =
-      await sql`SELECT * FROM creations WHERE publish = true ORDER BY created_at DESC`;
+      await sql`SELECT * FROM creations WHERE publish = true ORDER BY create_at DESC`;
 
     res.json({ success: true, creations });
   } catch (error) {
@@ -37,14 +37,14 @@ export const toggleLikeCreation = async (req, res) => {
       return res.json({ success: false, message: "Creation not found" });
     }
 
-    let currentLikes = creation.likes || []; // fallback empty array
-    const userIdStr = String(userId);
+    let currentLikes = creation.likes || []; 
+    const userIdStr = userId.toString();
     let updatedLikes;
     let message;
 
     if (currentLikes.includes(userIdStr)) {
       // Unlike
-      updatedLikes = currentLikes.filter((u) => u !== userIdStr);
+      updatedLikes = currentLikes.filter((user) => user !== userIdStr);
       message = "Creation Unliked";
     } else {
       // Like
@@ -52,13 +52,10 @@ export const toggleLikeCreation = async (req, res) => {
       message = "Creation Liked";
     }
 
-    await sql`
-      UPDATE creations 
-      SET likes = ${sql.array(updatedLikes, "text")} 
-      WHERE id = ${id}
-    `;
+    const formattedArray = `{${updatedLikes.join(',')}}`
+    await sql`UPDATE creations SET likes = ${formattedArray} ::text[] WHERE id = ${id}`;
 
-    res.json({ success: true, message, likes: updatedLikes });
+    res.json({ success: true, message });
   } catch (error) {
     res.json({ success: false, message: error.message });
   }
