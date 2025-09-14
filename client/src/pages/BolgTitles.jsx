@@ -137,7 +137,7 @@ const BolgTitles = () => {
           <CopyButton content={content} />
         </div>
 
-        <div className="flex-1 mt-4">
+        <div className="mt-3 h-full overflow-y-auto text-sm text-slate-600 relative">
           {loading ? (
             <div className="animate-pulse space-y-4">
               <div className="h-4 bg-gray-200 rounded w-3/4"></div>
@@ -159,7 +159,7 @@ const BolgTitles = () => {
               </div>
             </div>
           ) : (
-            <div className="reset-tw">
+            <div className="reset-tw prose prose-sm max-w-none">
               <Markdown>{content}</Markdown>
             </div>
           )}
