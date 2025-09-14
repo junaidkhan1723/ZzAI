@@ -1,14 +1,47 @@
 import React, { useEffect, useState } from "react";
-import { dummyCreationData } from "../assets/assets";
 import { Gem, Sparkles } from "lucide-react";
 import { Protect } from "@clerk/clerk-react";
 import CreationItem from "../components/CreationItem";
+import axios from "axios";
+import { useAuth } from "@clerk/clerk-react";
+import toast from "react-hot-toast";
+
+axios.defaults.baseURL = import.meta.env.VITE_BASE_URL;
 
 const Dashboard = () => {
   const [creations, setCreations] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const { getToken } = useAuth();
 
   const getDashboardData = async () => {
-    setCreations(dummyCreationData);
+    try {
+      const { data } = await axios.get("/api/user/get-user-creations", {
+        headers: { Authorization: `Bearer ${await getToken()}` },
+      });
+
+      if (data.success) {
+        setCreations(data.creations);
+      } else {
+        toast.error(data.message);
+      }
+    } catch (error) {
+      toast.error(error.message);
+    }
+    setLoading(false);
+  };
+
+  //Delete handler
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`/api/user/delete-creation/${id}`, {
+        headers: { Authorization: `Bearer ${await getToken()}` },
+      });
+
+      setCreations((prev) => prev.filter((item) => item.id !== id));
+      toast.success("Creation deleted successfully");
+    } catch (error) {
+      toast.error(error.response?.data?.message || error.message);
+    }
   };
 
   useEffect(() => {
@@ -46,14 +79,24 @@ const Dashboard = () => {
       </div>
 
       {/* Recent Creations */}
-      <div className="space-y-3">
-        <p className="mt-6 mb-4">Recent Creations</p>
-        {creations.length > 0 ? (
-          creations.map((item) => <CreationItem key={item.id} item={item} />)
-        ) : (
-          <p className="text-sm text-gray-400">No creations yet. Start creating!</p>
-        )}
-      </div>
+      {loading ? (
+        <div className="flex justify-center items-center h-full">
+          <span className="w-10 h-10 my-1 rounded-full border-4 border-primary border-t-transparent animate-spin"></span>
+        </div>
+      ) : (
+        <div className="space-y-3">
+          <p className="mt-6 mb-4">Recent Creations</p>
+          {creations.length > 0 ? (
+            creations.map((item) => (
+              <CreationItem key={item.id} item={item} onDelete={handleDelete} />
+            ))
+          ) : (
+            <p className="text-sm text-gray-400">
+              No creations yet. Start creating!
+            </p>
+          )}
+        </div>
+      )}
     </div>
   );
 };
