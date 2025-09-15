@@ -126,19 +126,35 @@ const Navbar = () => {
           ))}
         </nav>
 
-        {/* Desktop authentication (Get started / User button) */}
-        <div className="hidden md:flex items-center">
-          {user ? (
-            <UserButton />
-          ) : (
-            <button
-              onClick={() => openSignIn({})}
-              className="flex items-center gap-2 rounded-full text-sm cursor-pointer bg-blue-600 text-white px-10 py-2.5 hover:bg-blue-700 transition-colors"
-            >
-              Get started <ArrowRight className="w-4 h-4" />
-            </button>
-          )}
-        </div>
+{/* Desktop authentication (Get started / User button) */}
+<div className="hidden md:flex items-center">
+  {user ? (
+    <UserButton />
+  ) : (
+    <button
+      onClick={() => openSignIn({})}
+      className="group relative flex items-center justify-center gap-2 
+                 rounded-full text-sm font-medium cursor-pointer
+                 bg-primary hover:bg-indigo-700
+                 text-white px-10 py-2.5
+                 transition-all duration-200 ease-out
+                 transform hover:scale-[1.02]
+                 focus:outline-none focus:ring-2 focus:ring-blue-700/50 focus:ring-offset-2 focus:ring-offset-white
+                 active:scale-[0.98]
+                 border border-blue-700/50
+                 shadow-sm hover:shadow-md"
+    >
+      {/* Button content */}
+      <span className="relative z-10 flex items-center gap-2">
+        Get started
+        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+      </span>
+      
+      {/* Subtle hover effect */}
+      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-gray-800/0 via-gray-700/20 to-gray-800/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+    </button>
+  )}
+</div>
 
         {/* Mobile hamburger menu button */}
         <div className="md:hidden flex items-center gap-3">
@@ -189,22 +205,36 @@ const Navbar = () => {
             </button>
           ))}
 
-          {/* Mobile authentication button */}
-          {!user && (
-            <button
-              onClick={() => openSignIn({})}
-              className={`flex items-center gap-2 rounded-full text-lg cursor-pointer bg-primary text-white px-12 py-3 
-                          hover:bg-blue-900 transition-all duration-200 transform hover:scale-105 ${
-                            isMobileMenuOpen ? "animate-fade-in-up" : ""
-                          }`}
-              style={{
-                animationDelay: `${navigationLinks.length * 100}ms`,
-                animationFillMode: "backwards",
-              }}
-            >
-              Get started <ArrowRight className="w-5 h-5" />
-            </button>
-          )}
+         {/* Modern AI SaaS Authentication Button - Chat Theme Inspired */}
+{!user && (
+  <button
+    onClick={() => openSignIn({})}
+    className={`group relative flex items-center justify-center gap-2 
+                rounded-lg text-sm font-medium cursor-pointer
+                bg-gray-900 hover:bg-gray-800
+                text-white px-4 py-2 md:px-6 md:py-2.5
+                transition-all duration-200 ease-out
+                transform hover:scale-[1.02]
+                focus:outline-none focus:ring-2 focus:ring-gray-700/50 focus:ring-offset-2 focus:ring-offset-white
+                active:scale-[0.98]
+                border border-gray-700/50
+                shadow-sm hover:shadow-md
+                ${isMobileMenuOpen ? "animate-fade-in-up" : ""}`}
+    style={{
+      animationDelay: `${navigationLinks.length * 100}ms`,
+      animationFillMode: "backwards",
+    }}
+  >
+    {/* Button content */}
+    <span className="relative z-10 flex items-center gap-1.5">
+      Get started
+      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+    </span>
+    
+    {/* Subtle hover effect */}
+    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-gray-800/0 via-gray-700/20 to-gray-800/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+  </button>
+)}
         </div>
       </div>
     </>

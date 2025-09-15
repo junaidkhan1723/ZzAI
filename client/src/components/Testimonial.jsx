@@ -74,10 +74,10 @@ const Testimonial = () => {
     <>
       {/* Headline */}
       <div className="max-w-2xl mx-auto text-center mb-10 sm:mt-10 mt-2">
-        <h1 className="text-3xl md:text-4xl font-bold text-gray-700">
+        <h1 className="text-3xl md:text-4xl font-bold text-gray-900">
           What Our Users Say
         </h1>
-        <p className="text-sm md:text-base text-gray-500 mt-2">
+        <p className="text-sm md:text-base text-gray-700 mt-2">
           Hear from professionals who boosted their skills and careers with our
           AI tools.
         </p>
