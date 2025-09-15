@@ -44,7 +44,13 @@ zz.ai/
 
 <h2>📸 Screenshots</h2>
 <ul>
-  <li><strong>Dashboard:</strong> <em>
+  <li><strong>Landing Page:</strong> <em>
+    <img width="1920" height="1080" alt="Screenshot 2025-09-15 222419" src="https://github.com/user-attachments/assets/a7a834a0-5d6f-4ca4-ada9-43961ca41255" />
+    <img width="1920" height="1080" alt="Screenshot 2025-09-15 222431" src="https://github.com/user-attachments/assets/143db844-e221-4c77-b8bc-5ff8bf0c3815" />
+   <img width="1920" height="1080" alt="Screenshot 2025-09-15 222439" src="https://github.com/user-attachments/assets/4334bf66-ae73-4993-97d0-81b2b05dcd38" />
+
+  </em></li>
+   <li><strong>Dashboard:</strong> <em>
     <!-- Add your screenshots here -->
   </em></li>
   <li><strong>Community:</strong> <em>
