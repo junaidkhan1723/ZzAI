@@ -45,19 +45,23 @@ zz.ai/
 <h2>📸 Screenshots</h2>
 <ul>
   <li><strong>Landing Page:</strong> <em>
-    <img width="1920" height="1080" alt="Screenshot 2025-09-15 222419" src="https://github.com/user-attachments/assets/a7a834a0-5d6f-4ca4-ada9-43961ca41255" />
-    <img width="1920" height="1080" alt="Screenshot 2025-09-15 222431" src="https://github.com/user-attachments/assets/143db844-e221-4c77-b8bc-5ff8bf0c3815" />
-   <img width="1920" height="1080" alt="Screenshot 2025-09-15 222439" src="https://github.com/user-attachments/assets/4334bf66-ae73-4993-97d0-81b2b05dcd38" />
-
+   <img width="1920" height="1020" alt="Screenshot 2025-09-15 224333" src="https://github.com/user-attachments/assets/783fa2d0-6fed-4af8-94ad-f935fde30d48" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-15 224542" src="https://github.com/user-attachments/assets/af6a9b0d-b149-4e2a-b27f-2156642010e5" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-15 224549" src="https://github.com/user-attachments/assets/19146b7b-896a-4b43-bc56-197a6a7806c5" />
   </em></li>
    <li><strong>Dashboard:</strong> <em>
-    <!-- Add your screenshots here -->
+  <img width="1920" height="1020" alt="Screenshot 2025-09-15 224524" src="https://github.com/user-attachments/assets/5acfd74a-e8fa-48c5-93d3-4fc121e07c16" />
   </em></li>
   <li><strong>Community:</strong> <em>
-    <!-- Add your screenshots here -->
+    <img width="1920" height="1020" alt="Screenshot 2025-09-15 224448" src="https://github.com/user-attachments/assets/5a216784-5544-4adb-8357-f5365290faaa" />
   </em></li>
   <li><strong>AI Tools:</strong> <em>
-    <!-- Add your screenshots here -->
+   <img width="1920" height="1020" alt="Screenshot 2025-09-15 224517" src="https://github.com/user-attachments/assets/3b4c730d-5605-4072-8abb-be0687a558a9" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-15 224513" src="https://github.com/user-attachments/assets/9cbf7bdb-a1a8-492f-8132-7d91daa40b58" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-15 224506" src="https://github.com/user-attachments/assets/1d8421d6-2628-48da-9a4a-9be6068c84a5" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-15 224501" src="https://github.com/user-attachments/assets/2e7e5122-bc3c-4765-957a-f0ab5b9a10cd" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-15 224458" src="https://github.com/user-attachments/assets/32aab6f1-d5bd-493a-a38d-1f04a4f32328" />
+<img width="1920" height="1020" alt="Screenshot 2025-09-15 224453" src="https://github.com/user-attachments/assets/19b98578-d7b6-4260-8dc3-04b5b813aaa2" />
   </em></li>
 </ul>
 
