@@ -5,7 +5,7 @@
 <hr />
 
 <h2>🌐 Live Website</h2>
-<p>🔗 <a href="https://Zz-ai.vercel.app/" target="_blank">View Zz.ai Live</a></p>
+<p>🔗 <a href="https://zzai-flax.vercel.app/" target="_blank">View Zz.ai Live</a></p>
 
 <hr />
 
