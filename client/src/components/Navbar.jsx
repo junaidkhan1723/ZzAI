@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import { ArrowRight, Menu, X } from "lucide-react";
 import { useClerk, UserButton, useUser } from "@clerk/clerk-react";
 import { useNavigate } from "react-router-dom";
-import { assets } from "../assets/assets";
+import { assets } from "../assets/assets.js";
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -12,10 +12,14 @@ const Navbar = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [activeHash, setActiveHash] = useState(window.location.hash || "#home");
 
-  // Close mobile menu on window resize (if screen becomes desktop size)
+  // Debounced resize handler for performance
   useEffect(() => {
+    let resizeTimer;
     const handleResize = () => {
-      if (window.innerWidth >= 768) setIsMobileMenuOpen(false);
+      clearTimeout(resizeTimer);
+      resizeTimer = setTimeout(() => {
+        if (window.innerWidth >= 768) setIsMobileMenuOpen(false);
+      }, 150);
     };
     window.addEventListener("resize", handleResize);
     return () => window.removeEventListener("resize", handleResize);
@@ -36,9 +40,22 @@ const Navbar = () => {
     return () => document.removeEventListener("click", handleClickOutside);
   }, [isMobileMenuOpen]);
 
-  // Listen to hash change (when user clicks nav or uses back/forward buttons)
+  // Close mobile menu with Escape key
   useEffect(() => {
-    const handleHashChange = () => setActiveHash(window.location.hash || "#home");
+    const handleEsc = (event) => {
+      if (event.key === "Escape" && isMobileMenuOpen) {
+        setIsMobileMenuOpen(false);
+      }
+    };
+    document.addEventListener("keydown", handleEsc);
+    return () => document.removeEventListener("keydown", handleEsc);
+  }, [isMobileMenuOpen]);
+
+  // Update active link on hash change
+  useEffect(() => {
+    const handleHashChange = () => {
+      setActiveHash(window.location.hash || "#home");
+    };
     window.addEventListener("hashchange", handleHashChange);
     return () => window.removeEventListener("hashchange", handleHashChange);
   }, []);
@@ -53,36 +70,24 @@ const Navbar = () => {
 
   // Handle navigation clicks
   const handleNavClick = (path) => {
-   if (path.startsWith("#")) {
-    const id = path.replace("#", "");
-    const el = document.getElementById(id);
-    if (el) {
-      el.scrollIntoView({ behavior: "smooth" });
-      // update active section manually if needed
-      window.history.replaceState(null, null, path);
-    }
-
-      // Update URL hash
-      window.location.hash = path;
-      setActiveHash(path);
-
-      // Close mobile menu
+    if (path.startsWith("#")) {
+      const id = path.replace("#", "");
+      const el = document.getElementById(id);
+      if (el) {
+        el.scrollIntoView({ behavior: "smooth" });
+        window.history.replaceState(null, null, path);
+        setActiveHash(path);
+      }
       setIsMobileMenuOpen(false);
     } else {
-      // For normal routes (if needed later)
       navigate(path);
+      setActiveHash(path);
       setIsMobileMenuOpen(false);
     }
   };
 
   return (
     <>
-      {/* Google Font for logo styling */}
-      <link
-        href="https://fonts.googleapis.com/css2?family=Great+Vibes&display=swap"
-        rel="stylesheet"
-      />
-
       {/* Navbar container */}
       <div className="fixed z-50 w-full bg-transparent backdrop-blur-sm flex justify-between sm:justify-around items-center py-3 px-4 sm:px-20 xl:px-32">
         
@@ -97,7 +102,7 @@ const Navbar = () => {
             onClick={() => handleNavClick("/")}
             className="cursor-pointer text-2xl sm:text-3xl font-bold hover:opacity-80 transition-opacity select-none"
             style={{
-              fontFamily: "Poppins, sans-serif",
+              fontFamily: "sans-serif", 
               fontWeight: "800",
               background: "linear-gradient(135deg, #1E40AF 0%, #6D28D9 100%)",
               WebkitBackgroundClip: "text",
@@ -115,6 +120,7 @@ const Navbar = () => {
             <button
               key={link.name}
               onClick={() => handleNavClick(link.path)}
+              aria-label={`Navigate to ${link.name}`}
               className={`relative transition-all duration-300 ${
                 activeHash === link.path
                   ? "bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent cursor-pointer"
@@ -126,43 +132,42 @@ const Navbar = () => {
           ))}
         </nav>
 
-{/* Desktop authentication (Get started / User button) */}
-<div className="hidden md:flex items-center">
-  {user ? (
-    <UserButton />
-  ) : (
-    <button
-      onClick={() => openSignIn({})}
-      className="group relative flex items-center justify-center gap-2 
-                 rounded-full text-sm font-medium cursor-pointer
-                 bg-primary hover:bg-indigo-700
-                 text-white px-10 py-2.5
-                 transition-all duration-200 ease-out
-                 transform hover:scale-[1.02]
-                 focus:outline-none focus:ring-2 focus:ring-blue-700/50 focus:ring-offset-2 focus:ring-offset-white
-                 active:scale-[0.98]
-                 border border-blue-700/50
-                 shadow-sm hover:shadow-md"
-    >
-      {/* Button content */}
-      <span className="relative z-10 flex items-center gap-2">
-        Get started
-        <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
-      </span>
-      
-      {/* Subtle hover effect */}
-      <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-gray-800/0 via-gray-700/20 to-gray-800/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-    </button>
-  )}
-</div>
+        {/* Desktop authentication*/}
+        <div className="hidden md:flex items-center">
+          {user ? (
+            <UserButton />
+          ) : (
+            <button
+              aria-label="sign-in"
+              onClick={() => openSignIn({})}
+              className="group relative flex items-center justify-center gap-2 
+                         rounded-full text-sm font-medium cursor-pointer
+                         bg-primary hover:bg-indigo-700
+                         text-white px-10 py-2.5
+                         transition-all duration-200 ease-out
+                         transform hover:scale-[1.02]
+                         focus:outline-none focus:ring-2 focus:ring-blue-700/50 focus:ring-offset-2 focus:ring-offset-white
+                         active:scale-[0.98]
+                         border border-blue-700/50
+                         shadow-sm hover:shadow-md"
+            >
+              <span className="relative z-10 flex items-center gap-2">
+                Get started
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+              </span>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-800/0 via-gray-700/20 to-gray-800/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </button>
+          )}
+        </div>
 
         {/* Mobile hamburger menu button */}
         <div className="md:hidden flex items-center gap-3">
           {user && <UserButton />}
           <button
+            aria-label="Toggle mobile menu"
             className="hamburger-button p-2 text-gray-700 hover:text-blue-600 transition-colors cursor-pointer"
             onClick={(e) => {
-              e.stopPropagation(); // prevent immediate close when clicking
+              e.stopPropagation();
               setIsMobileMenuOpen(!isMobileMenuOpen);
             }}
           >
@@ -180,7 +185,7 @@ const Navbar = () => {
         className={`mobile-menu fixed inset-0 z-40 md:hidden transition-all duration-300 ease-in-out ${
           isMobileMenuOpen ? "opacity-100 visible" : "opacity-0 invisible"
         }`}
-        onClick={(e) => e.stopPropagation()} // prevent closing when clicking inside
+        onClick={(e) => e.stopPropagation()}
       >
         {/* Backdrop */}
         <div className="absolute inset-0 bg-white/80 backdrop-blur-md" />
@@ -191,11 +196,12 @@ const Navbar = () => {
             <button
               key={link.name}
               onClick={() => handleNavClick(link.path)}
+              aria-label={`Navigate to ${link.name}`} 
               className={`text-2xl font-semibold transition-all duration-300 transform hover:-translate-y-1 ${
                 activeHash === link.path
                   ? "bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
                   : "text-gray-700 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:bg-clip-text hover:text-transparent"
-              } ${isMobileMenuOpen ? "animate-fade-in-up" : ""}`}
+              } ${isMobileMenuOpen ? "animate-fadeInUp" : ""}`} 
               style={{
                 animationDelay: `${index * 100}ms`,
                 animationFillMode: "backwards",
@@ -205,36 +211,34 @@ const Navbar = () => {
             </button>
           ))}
 
-         {/* Modern AI SaaS Authentication Button - Chat Theme Inspired */}
-{!user && (
-  <button
-    onClick={() => openSignIn({})}
-    className={`group relative flex items-center justify-center gap-2 
-                rounded-lg text-sm font-medium cursor-pointer
-                bg-gray-900 hover:bg-gray-800
-                text-white px-4 py-2 md:px-6 md:py-2.5
-                transition-all duration-200 ease-out
-                transform hover:scale-[1.02]
-                focus:outline-none focus:ring-2 focus:ring-gray-700/50 focus:ring-offset-2 focus:ring-offset-white
-                active:scale-[0.98]
-                border border-gray-700/50
-                shadow-sm hover:shadow-md
-                ${isMobileMenuOpen ? "animate-fade-in-up" : ""}`}
-    style={{
-      animationDelay: `${navigationLinks.length * 100}ms`,
-      animationFillMode: "backwards",
-    }}
-  >
-    {/* Button content */}
-    <span className="relative z-10 flex items-center gap-1.5">
-      Get started
-      <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
-    </span>
-    
-    {/* Subtle hover effect */}
-    <div className="absolute inset-0 rounded-lg bg-gradient-to-r from-gray-800/0 via-gray-700/20 to-gray-800/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-  </button>
-)}
+          {/* Authentication Button */}
+          {!user && (
+            <button
+              aria-label="sign-in" 
+              onClick={() => openSignIn({})}
+              className={`group relative flex items-center justify-center gap-2 
+                          rounded-lg text-sm font-medium cursor-pointer
+                          bg-gray-900 hover:bg-gray-800
+                          text-white px-4 py-2 md:px-6 md:py-2.5
+                          transition-all duration-200 ease-out
+                          transform hover:scale-[1.02]
+                          focus:outline-none focus:ring-2 focus:ring-gray-700/50 focus:ring-offset-2 focus:ring-offset-white
+                          active:scale-[0.98]
+                          border border-gray-700/50
+                          shadow-sm hover:shadow-md
+                          ${isMobileMenuOpen ? "animate-fadeInUp" : ""}`}
+              style={{
+                animationDelay: `${navigationLinks.length * 100}ms`,
+                animationFillMode: "backwards",
+              }}
+            >
+              <span className="relative z-10 flex items-center gap-1.5">
+                Get started
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-0.5 transition-transform duration-200" />
+              </span>
+              <div className="absolute inset-0 rounded-full bg-gradient-to-r from-gray-800/0 via-gray-700/20 to-gray-800/0 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+            </button>
+          )}
         </div>
       </div>
     </>
