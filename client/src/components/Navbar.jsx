@@ -90,7 +90,6 @@ const Navbar = () => {
     <>
       {/* Navbar container */}
       <div className="fixed z-50 w-full bg-transparent backdrop-blur-sm flex justify-between sm:justify-around items-center py-3 px-4 sm:px-20 xl:px-32">
-        
         {/* Logo section */}
         <div className="flex">
           <img
@@ -102,7 +101,7 @@ const Navbar = () => {
             onClick={() => handleNavClick("/")}
             className="cursor-pointer text-2xl sm:text-3xl font-bold hover:opacity-80 transition-opacity select-none"
             style={{
-              fontFamily: "sans-serif", 
+              fontFamily: "sans-serif",
               fontWeight: "800",
               background: "linear-gradient(135deg, #1E40AF 0%, #6D28D9 100%)",
               WebkitBackgroundClip: "text",
@@ -196,12 +195,12 @@ const Navbar = () => {
             <button
               key={link.name}
               onClick={() => handleNavClick(link.path)}
-              aria-label={`Navigate to ${link.name}`} 
+              aria-label={`Navigate to ${link.name}`}
               className={`text-2xl font-semibold transition-all duration-300 transform hover:-translate-y-1 ${
                 activeHash === link.path
                   ? "bg-gradient-to-r from-blue-500 to-purple-600 bg-clip-text text-transparent"
                   : "text-gray-700 hover:bg-gradient-to-r hover:from-blue-500 hover:to-purple-600 hover:bg-clip-text hover:text-transparent"
-              } ${isMobileMenuOpen ? "animate-fadeInUp" : ""}`} 
+              } ${isMobileMenuOpen ? "animate-fadeInUp" : ""}`}
               style={{
                 animationDelay: `${index * 100}ms`,
                 animationFillMode: "backwards",
@@ -214,7 +213,7 @@ const Navbar = () => {
           {/* Authentication Button */}
           {!user && (
             <button
-              aria-label="sign-in" 
+              aria-label="sign-in"
               onClick={() => openSignIn({})}
               className={`group relative flex items-center justify-center gap-2 
                           rounded-lg text-sm font-medium cursor-pointer
