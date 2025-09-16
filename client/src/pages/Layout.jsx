@@ -23,7 +23,7 @@ const Layout = () => {
             onClick={() => navigate("/")}
             className="cursor-pointer text-2xl sm:text-3xl font-bold hover:opacity-80 transition-opacity select-none"
             style={{
-              fontFamily: "Poppins, sans-serif",
+              fontFamily: "sans-serif",
               fontWeight: "800",
               background: "linear-gradient(135deg, #1E40AF 0%, #6D28D9 100%)",
               WebkitBackgroundClip: "text",
