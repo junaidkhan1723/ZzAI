@@ -81,7 +81,7 @@ const Hero = () => {
       {/* Hero Content */}
       <div className="relative z-10 container mx-auto max-w-6xl px-4 sm:px-6 lg:px-8 text-center flex flex-col justify-center items-center space-y-10">
         {/* Main Heading */}
-        <div className="space-y-2">
+        <div className="space-y-2 select-none">
           <h1 className="text-4xl sm:text-6xl lg:text-7xl font-bold leading-tight tracking-wide animate-fadeInUp animation-delay-200">
             <span className="bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent">
               Create smarter content with
@@ -113,7 +113,7 @@ const Hero = () => {
         </div>
 
         {/* Feature Pills */}
-        <div className="flex flex-wrap justify-center gap-3 animate-fadeInUp animation-delay-400 -mt-2 sm:mt-0">
+        <div className="flex flex-wrap justify-center gap-3 animate-fadeInUp animation-delay-400 -mt-2 sm:mt-0 select-none">
           {features.map((feature, idx) => (
             <div
               key={idx}
@@ -151,7 +151,7 @@ const Hero = () => {
         </div>
 
         {/* Trusted Badge */}
-        <div className="flex items-center gap-2 mx-auto text-gray-700 text-sm sm:text-base">
+        <div className="flex items-center gap-2 mx-auto text-gray-700 text-sm sm:text-base select-none">
           <img src={assets.user_group} alt="Users" className="h-8" />
           Trusted by <strong>1000+</strong> people
         </div>
