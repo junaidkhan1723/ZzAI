@@ -85,4 +85,4 @@ zz.ai/
   <li>Express & JWT for backend API & security</li>
 </ul>
 
-<p>🚀 Built with the MERN + Neon stack.</p>
+<p>🚀 Built with the MERN + Neon Database.</p>
